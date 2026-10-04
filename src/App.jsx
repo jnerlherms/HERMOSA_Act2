@@ -1,5 +1,5 @@
 import profile from "./assets/profile.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const info = {
   siteName: "jnerlherms",
@@ -51,6 +51,14 @@ export default function App() {
   const shown = projects.filter(
       (p) => filter === "All" || p.tech.split(" · ").includes(filter)
   );
+
+  const [showTop, setShowTop] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
       <div className="mx-auto max-w-[1400px] px-8">
         {/* ---------- NAVBAR ---------- */}
@@ -155,6 +163,16 @@ export default function App() {
             {info.email}
           </a>
         </section>
+
+        {/* ---------- BACK TO TOP BUTTON ---------- */}
+        {showTop && (
+            <a
+                href="#home"
+                className="fixed bottom-6 right-6 z-10 rounded-full bg-accent px-4 py-3 font-display text-xs text-ink hover:opacity-80"
+            >
+              ↑ Top
+            </a>
+        )}
 
         <footer className="pb-8 pt-16 text-center text-sm text-muted">© 2026 @jnerlherms</footer>
       </div>
