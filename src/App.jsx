@@ -1,4 +1,5 @@
 import profile from "./assets/profile.png";
+import { useState } from "react";
 
 const info = {
   siteName: "jnerlherms",
@@ -45,6 +46,11 @@ const projects = [
 const skills = ["HTML", "CSS", "JavaScript", "React", "PHP", "MySQL", "Java", "Kotlin", "C", "C++"];
 
 export default function App() {
+  const [filter, setFilter] = useState("All");
+  const filters = ["All", "PHP", "MySQL", "Java", "Kotlin"];
+  const shown = projects.filter(
+      (p) => filter === "All" || p.tech.split(" · ").includes(filter)
+  );
   return (
       <div className="mx-auto max-w-[1400px] px-8">
         {/* ---------- NAVBAR ---------- */}
@@ -112,8 +118,21 @@ export default function App() {
         {/* ---------- PROJECTS ---------- */}
         <section className="max-w-3xl pb-8 pt-20" id="projects">
           <h3 className="mb-5 font-display text-3xl">Projects</h3>
+          <div className="mb-4 flex flex-wrap gap-2">
+            {filters.map((f) => (
+                <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`rounded-full border border-accent-soft px-4 py-1.5 text-sm transition-colors ${
+                        filter === f ? "bg-accent text-ink" : "text-muted hover:text-ink"
+                    }`}
+                >
+                  {f}
+                </button>
+            ))}
+          </div>
           <div className="grid gap-4">
-            {projects.map((p) => (
+            {shown.map((p) => (
                 <a
                     key={p.id}
                     href={p.link}
