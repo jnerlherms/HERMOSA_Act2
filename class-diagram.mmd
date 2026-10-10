@@ -1,123 +1,107 @@
 classDiagram
     direction TB
 
-    %% Data models from src/models/ folder
+%% Data models from the src/models/ folder
     class Info {
-        <<model src/models/Info.js>>
-        +string siteName = "jnerlherms"
-        +string firstName = "Jon Erlo"
-        +string lastName = "Hermosa"
-        +string greeting = "Hello, I'm"
-        +string roleSmall = "CIT-U"
-        +string roleBig = "BSIT 3rd Year"
-        +string roleBig2 = "Student"
-        +string about = "3rd year IT student at CIT-U..."
-        +string email = "jnerlherms@gmail.com"
-        +string github
-        +string instagram
-        +string facebook
-        +string resume = "#"
+<<model src/models/Info.js>>
++string siteName = "jnerlherms"
++string firstName = "Jon Erlo"
++string lastName = "Hermosa"
++string greeting = "Hello, I'm"
++string roleSmall = "CIT-U"
++string roleBig = "BSIT 3rd Year"
++string roleBig2 = "Student"
++string about = "3rd year IT student at CIT-U..."
++string email = "jnerlherms@gmail.com"
++string github
++string instagram
++string facebook
++string resume = "#"
+}
+
+class Project {
+<<model src/models/Project.js>>
++number id
++string title
++string desc
++string tech
++string link
+}
+
+class SkillList {
+<<model src/models/SkillList.js>>
++string[] skills = HTML CSS JavaScript React PHP MySQL Java Kotlin C C++
     }
 
-    class Project {
-        <<model src/models/Project.js>>
-        +number id
-        +string title
-        +string desc
-        +string tech
-        +string link
+%% Entry point: src/main.jsx
+class Main {
+<<entry src/main.jsx>>
++mount() void
+}
+
+%% The single functional component in src/App.jsx
+class App {
+<<component src/App.jsx>>
+-string filter = "All"
+-boolean showTop = false
++string[] filters = All PHP MySQL Java Kotlin
++Project[] shown = filtered subset of projects
++onScroll() void
++render() JSX
+}
+
+%% UI sections are inline JSX returned by App, not separate files
+class Navbar {
+<<JSX section>>
++siteName link
++links to About Projects Contact
+}
+
+class Hero {
+<<JSX section>>
++greeting, name and role
++social links IG GitHub FB
++profile image
+}
+
+class AboutSection {
+<<JSX section>>
++bio text
++skill chips
+}
+
+class ProjectsSection {
+<<JSX section>>
++filter buttons
++project list
+}
+
+class ContactSection {
+<<JSX section>>
++mailto email link
     }
 
-    class SkillList {
-        <<model src/models/SkillList.js>>
-        +string[] skills = HTML CSS JavaScript React PHP MySQL Java Kotlin C C++
-    }
+class BackToTop {
+<<JSX section>>
++shown only when showTop is true
++link to #home
+}
 
-    %% Main component: src/main.jsx
-    class Main {
-        +createRoot#root void
-        +render StrictMode + App void
-    }
+class FooterSection {
+<<JSX section>>
++copyright text
+}
 
-    %% App: the single functional component in src/App.jsx
-    class App {
-        -string filter = "All"
-        -boolean showTop = false
-        +string[] filters = All PHP MySQL Java Kotlin
-        +Project[] shown = filtered subset of projects
-        +onScroll sets showTop when scrollY is > 400
-        +render JSX
-    }
+note for Project "Records in the projects array: Sanina'an, AlphonseTronics App, Blood of the Rift"
 
-    %% UI sections are inline JSX returned by App, not separate classes
-    class Navbar {
-        <<JSX section>>
-        +siteName link
-        +links to About Projects Contact
-    }
-
-    class Hero {
-        <<JSX section>>
-        +greeting + name + role
-        +social links IG GitHub FB
-        +profile image
-    }
-
-    class AboutSection {
-        <<JSX section>>
-        +bio text
-        +skill chips
-    }
-
-    class ProjectsSection {
-        <<JSX section>>
-        +filter buttons
-        +project list
-    }
-
-    class ContactSection {
-        <<JSX section>>
-        +mailto email link
-    }
-
-    class BackToTop {
-        <<JSX section>>
-        +shown only when showTop is true
-        +link to #home
-    }
-
-    %% Real project records modeled as Project instances (lines 22-44)
-    class Saninaan {
-        <<Project>>
-        id = 1
-        title = "Sanina'an"
-        tech = PHP · MySQL
-    }
-
-    class AlphonseTronics {
-        <<Project>>
-        id = 2
-        title = "AlphonseTronics App"
-        tech = Kotlin
-    }
-
-    class BloodOfTheRift {
-        <<Project>>
-        id = 3
-        title = "Blood of the Rift"
-        tech = Java
-    }
-
-    Main "1" --> "1" App : mounts
-    App "1" --> "1" Info : uses src/models/Info.js
-    App "1" --> "1..*" Project : renders src/models/Project.js
-    App "1" --> "1" SkillList : maps src/models/SkillList.js
-    Project <|-- Saninaan
-    Project <|-- AlphonseTronics
-    Project <|-- BloodOfTheRift
-    App ..> Navbar : renders JSX
-    App ..> Hero : renders JSX
-    App ..> AboutSection : renders JSX
-    App ..> ProjectsSection : renders JSX
-    App ..> ContactSection : renders JSX
-    App ..> BackToTop : renders JSX
+Main "1" --> "1" App : mounts
+App "1" --> "1" Info : uses
+App "1" --> "1..*" Project : renders
+App "1" --> "1" SkillList : maps
+App ..> Navbar : renders JSX
+App ..> Hero : renders JSX
+App ..> AboutSection : renders JSX
+App ..> ProjectsSection : renders JSX
+App ..> ContactSection : renders JSX
+App ..> BackToTop : renders JSX
+App ..> FooterSection : renders JSX
