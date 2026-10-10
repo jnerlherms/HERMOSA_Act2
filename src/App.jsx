@@ -1,49 +1,8 @@
 import profile from "./assets/profile.png";
+import info from "./models/Info";
+import projects from "./models/Project";
+import skills from "./models/SkillList";
 import { useState, useEffect } from "react";
-
-const info = {
-  siteName: "jnerlherms",
-  firstName: "Jon Erlo",
-  lastName: "Hermosa",
-  greeting: "Hello, I'm",
-  roleSmall: "CIT-U",
-  roleBig: "BSIT 3rd Year",
-  roleBig2: "Student",
-  about:
-      "I am a 3rd year IT student at CIT-U who loves building websites. " +
-      "I work with HTML, CSS, JavaScript, PHP, MySQL, Java, C, and now React.",
-  email: "jnerlherms@gmail.com",
-  github: "https://github.com/jnerlherms",
-  instagram: "https://www.instagram.com/big_joot/",
-  facebook: "https://www.facebook.com/jonerlo.hermosa",
-  resume: "#",
-};
-
-const projects = [
-  {
-    id: 1,
-    title: "Sanina'an",
-    desc: "A Cebuano-themed thrift marketplace web app.",
-    tech: "PHP · MySQL",
-    link: "https://github.com/jnerlherms/Sanina-an",
-  },
-  {
-    id: 2,
-    title: "AlphonseTronics App",
-    desc: "A mobile app made for my Mobile Development class.",
-    tech: "Kotlin",
-    link: "https://github.com/jnerlherms/AlphonseTronics-App",
-  },
-  {
-    id: 3,
-    title: "Blood of the Rift",
-    desc: "A terminal-based game that runs in the console.",
-    tech: "Java",
-    link: "https://github.com/jnerlherms/BLOOD-OF-THE-RIFT-TERMINAL-BASED-",
-  },
-];
-
-const skills = ["HTML", "CSS", "JavaScript", "React", "PHP", "MySQL", "Java", "Kotlin", "C", "C++"];
 
 export default function App() {
   const [filter, setFilter] = useState("All");

@@ -1,8 +1,9 @@
 classDiagram
     direction TB
 
-    %% Data models defined in src/App.jsx (lines 4-46)
+    %% Data models from src/models/ folder
     class Info {
+        <<model src/models/Info.js>>
         +string siteName = "jnerlherms"
         +string firstName = "Jon Erlo"
         +string lastName = "Hermosa"
@@ -19,6 +20,7 @@ classDiagram
     }
 
     class Project {
+        <<model src/models/Project.js>>
         +number id
         +string title
         +string desc
@@ -26,8 +28,8 @@ classDiagram
         +string link
     }
 
-    %% Existing skills list (line 46) shown as chips in About
     class SkillList {
+        <<model src/models/SkillList.js>>
         +string[] skills = HTML CSS JavaScript React PHP MySQL Java Kotlin C C++
     }
 
@@ -107,9 +109,9 @@ classDiagram
     }
 
     Main "1" --> "1" App : mounts
-    App "1" --> "1" Info : uses info
-    App "1" --> "1..*" Project : renders shown
-    App "1" --> "1" SkillList : maps skills
+    App "1" --> "1" Info : uses src/models/Info.js
+    App "1" --> "1..*" Project : renders src/models/Project.js
+    App "1" --> "1" SkillList : maps src/models/SkillList.js
     Project <|-- Saninaan
     Project <|-- AlphonseTronics
     Project <|-- BloodOfTheRift
